@@ -1,5 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
+#include <X11/XF86keysym.h>
+
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -66,6 +68,16 @@ static const char *termcmd[]  = { "st", NULL };
 static const char *firefoxcmd[]  = { "firefox", NULL };
 static const char *clipmenucmd[]  = { "clipmenu", NULL };
 static const char *translatecmd[]  = { "dmenu-translate", NULL };
+static const char *screenshotcmd[]  = { "flameshot", "gui", NULL };
+
+static const char *volupcmd[]  = { "/home/narso/dev/linux/scripts/audio.bash", "+", "5", NULL };
+static const char *voldowncmd[]  = { "/home/narso/dev/linux/scripts/audio.bash", "-", "5", NULL };
+static const char *volmutecmd[]  = { "/home/narso/dev/linux/scripts/audio.bash", "toggle", NULL };
+
+static const char *pauseplaycmd[] = { "/home/narso/dev/linux/scripts/pauseplay.bash", NULL };
+
+static const char *brightnessupcmd[]  = { "/home/narso/dev/linux/scripts/brightness.bash", "+", "10", NULL };
+static const char *brightnessdowncmd[]  = { "/home/narso/dev/linux/scripts/brightness.bash", "-", "10", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -74,6 +86,13 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_v,      spawn,          {.v = clipmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ControlMask,           XK_t,      spawn,          {.v = translatecmd } },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = screenshotcmd } },
+	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = volupcmd } },
+	{ 0,                            XF86XK_AudioLowerVolume, spawn, {.v = voldowncmd } },
+	{ 0,                            XF86XK_AudioMute, spawn, {.v = volmutecmd } },
+	{ 0,                            XF86XK_AudioPlay, spawn, {.v = pauseplaycmd } },
+	{ 0,                            XF86XK_MonBrightnessUp, spawn, {.v = brightnessupcmd } },
+	{ 0,                            XF86XK_MonBrightnessDown, spawn, {.v = brightnessdowncmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
