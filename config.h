@@ -12,8 +12,8 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
+static const char *fonts[]          = { "Inter Nerd Font:size=11", "Noto Color Emoji:size=11" };
+static const char dmenufont[]       = "Inter Nerd Font:size=11";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -69,6 +69,7 @@ static const char *firefoxcmd[]  = { "firefox", NULL };
 static const char *clipmenucmd[]  = { "clipmenu", NULL };
 static const char *translatecmd[]  = { "dmenu-translate", NULL };
 static const char *screenshotcmd[]  = { "flameshot", "gui", NULL };
+static const char *emojicmd[]  = { "/home/narso/dev/linux/scripts/bemoji/bemoji", "-t", NULL };
 
 static const char *volupcmd[]  = { "/home/narso/dev/linux/scripts/audio.bash", "+", "5", NULL };
 static const char *voldowncmd[]  = { "/home/narso/dev/linux/scripts/audio.bash", "-", "5", NULL };
@@ -84,6 +85,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_w,      spawn,          {.v = firefoxcmd } },
 	{ MODKEY,                       XK_v,      spawn,          {.v = clipmenucmd } },
+	{ MODKEY,                       XK_period, spawn,          {.v = emojicmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ControlMask,           XK_t,      spawn,          {.v = translatecmd } },
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = screenshotcmd } },
