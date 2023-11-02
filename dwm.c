@@ -988,7 +988,7 @@ focusstack(const Arg *arg)
 	int i;
 	Client *c, *p;
 
-	if (selmon->sel->isfullscreen && lockfullscreen) /* no focus switching in fullscreen */
+	if (!selmon->sel || (selmon->sel->isfullscreen && lockfullscreen))
 		return;
 
 	i = stackpos(arg);
