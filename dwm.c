@@ -2026,15 +2026,9 @@ void
 col(Monitor *m)
 {
 	unsigned int i, n, h, w, x, y, mw;
-	float mfacts = 0, sfacts = 0;
 	Client *c;
 
-	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++) {
-		if (n < m->nmaster)
-			mfacts += c->cfact;
-		else
-			sfacts += c->cfact;
-	}
+	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
 	if (n == 0)
 		return;
 
@@ -2044,17 +2038,13 @@ col(Monitor *m)
 		mw = m->ww;
 	for (i = x = y = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
 		if (i < m->nmaster) {
-			w = (mw - x) * (c->cfact / mfacts);
+			w = (mw - x) / (MIN(n, m->nmaster) - i);
 			resize(c, x + m->wx, m->wy, w - (2 * c->bw), m->wh - (2 * c->bw), 0);
-			if (x + WIDTH(c) < mw)
-				x += WIDTH(c);
-			mfacts -= c->cfact;
+			x += WIDTH(c);
 		} else {
-			h = (m->wh - y) * (c->cfact / sfacts);
+			h = (m->wh - y) / (n - i);
 			resize(c, x + m->wx, m->wy + y, m->ww - x - (2 * c->bw), h - (2 * c->bw), 0);
-			if (y + HEIGHT(c) < m->wh)
-				y += HEIGHT(c);
-			sfacts -= c->cfact;
+			y += HEIGHT(c);
 		}
 }
 
